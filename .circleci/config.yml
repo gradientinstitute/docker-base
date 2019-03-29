@@ -8,11 +8,8 @@ jobs:
       - setup_remote_docker: 
         docker_layer_caching: true
       - run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASS
-        docker run -d --name db company/proprietary-db:1.2.3
-
-     # build the application image
-     - run: docker build -t company/app:$CIRCLE_BRANCH .
-
-     # deploy the image
-     - run: docker push company/app:$CIRCLE_BRANCH
+          echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+          gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+          gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+      - run: docker build -t company/app:$CIRCLE_BRANCH .
+      - run: docker push company/app:$CIRCLE_BRANCH
