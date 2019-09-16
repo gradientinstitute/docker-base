@@ -16,6 +16,4 @@ RUN echo "en_AU UTF-8" > /etc/locale.gen \
     openblas \
     python-virtualenv \
     python-virtualenvwrapper \
-    && pacman --noconfirm -Scc \
-    && rm -r /tmp/*
-
+    && pacman --noconfirm -Scc
