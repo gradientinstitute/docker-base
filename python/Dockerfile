@@ -12,7 +12,10 @@ RUN echo "en_AU UTF-8" > /etc/locale.gen \
     && locale-gen \
     && pacman --noconfirm -Syyu \
     && pacman --noconfirm -S \
-    base-devel \
+    make \
+    pkgconf \
+    util-linux \
+    gzip \
     git \
     ssh \
     wget \
@@ -20,6 +23,7 @@ RUN echo "en_AU UTF-8" > /etc/locale.gen \
     python-pip \
     python-virtualenv \
     python-virtualenvwrapper \
-    && pacman --noconfirm -Scc \
-    && source /usr/bin/virtualenvwrapper.sh \
-    && mkdir $WORKON_HOME
+    && pacman --noconfirm -Scc
+
+RUN /usr/bin/virtualenvwrapper.sh 
+RUN mkdir $WORKON_HOME
