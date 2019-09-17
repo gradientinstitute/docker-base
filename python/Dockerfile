@@ -14,10 +14,8 @@ RUN echo "en_AU UTF-8" > /etc/locale.gen \
     && pacman --noconfirm -S \
     make \
     pkgconf \
-    util-linux \
-    gzip \
     git \
-    ssh \
+    openssh \
     wget \
     openblas \
     python-pip \
