@@ -11,7 +11,7 @@ RUN echo "en_AU UTF-8" > /etc/locale.gen \
     && locale-gen \
     && pacman --noconfirm -Syyu \
     && pacman --noconfirm -S \
-    git \
+    base-devel \
     wget \
     openblas \
     python-virtualenv \
