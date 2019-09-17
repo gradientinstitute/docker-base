@@ -4,7 +4,8 @@ MAINTAINER Lachlan McCalman <lachlan@gradientinstitute.org>
 
 ENV EDITOR="/usr/bin/true" \
     LC_ALL="en_AU.UTF-8" \
-    LANG="en_AU.UTF-8"
+    LANG="en_AU.UTF-8" \
+    WORKON_HOME="~/.virtualenvs"
 
 RUN echo "en_AU UTF-8" > /etc/locale.gen \
     && echo "LANG=en_AU.UTF-8" > /etc/locale.conf \
@@ -20,6 +21,5 @@ RUN echo "en_AU UTF-8" > /etc/locale.gen \
     python-virtualenv \
     python-virtualenvwrapper \
     && pacman --noconfirm -Scc \
-    && export WORKON_HOME=~/.virtualenvs \
     && source /usr/bin/virtualenvwrapper.sh \
     && mkdir $WORKON_HOME
