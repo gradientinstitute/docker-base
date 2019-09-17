@@ -12,8 +12,14 @@ RUN echo "en_AU UTF-8" > /etc/locale.gen \
     && pacman --noconfirm -Syyu \
     && pacman --noconfirm -S \
     base-devel \
+    git \
+    ssh \
     wget \
     openblas \
+    python-pip \
     python-virtualenv \
     python-virtualenvwrapper \
-    && pacman --noconfirm -Scc
+    && pacman --noconfirm -Scc \
+    && export WORKON_HOME=~/.virtualenvs \
+    && source /usr/bin/virtualenvwrapper.sh \
+    && mkdir $WORKON_HOME
