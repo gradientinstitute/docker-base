@@ -9,6 +9,7 @@ executors:
 
 jobs:
   build:
+    executor: docker-publisher
     steps:
       - checkout
       - setup_remote_docker:   
