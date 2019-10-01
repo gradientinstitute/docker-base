@@ -23,7 +23,7 @@ jobs:
   publish:
     executor: docker-publisher
     steps:
-      - attach_workspace
+      - attach_workspace:
         at: /tmp/workspace
       - setup_remote_docker:
       - run: ./auth_docker.sh
