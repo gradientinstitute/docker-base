@@ -37,12 +37,12 @@ jobs:
           name: Push docker image
           command: docker push $IMAGE_NAME
       
-  workflows:
-    version: 2
-    build-deploy:
-      jobs:
-        - build
-        - publish-to-gcloud
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - publish-to-gcloud
 
 
 # :
