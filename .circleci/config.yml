@@ -10,8 +10,12 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: docker build -t  python ./python
-      - run: docker save -o image.tar python
+      - run:
+          name: Build docker image
+          command: docker build -t  python ./python
+      - run: 
+          name: Save docker image
+          command: docker save -o image.tar python
       - persist_to_workspace:
           root: .
           paths:
