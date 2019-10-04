@@ -20,6 +20,8 @@ RUN echo "en_AU.UTF-8 UTF-8" > /etc/locale.gen \
     openssh \
     wget \
     openblas \
+    python-pip \
+    python-virtualenv \
     python-pipenv \
     && pacman --noconfirm -Scc
 
