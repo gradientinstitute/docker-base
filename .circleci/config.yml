@@ -1,16 +1,16 @@
-version: 2
+version: 2.0
+
 jobs:
   build:
+    working_directory: /tmp/build
     docker: 
-    - image: google/cloud-sdk
+      - image: google/cloud-sdk
     steps:
       - checkout
-      - setup_remote_docker:   
-          docker_layer_caching: true
-      - run: |
-          echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
-          gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-          gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-          gcloud auth configure-docker
-      - run: docker build -t asia.gcr.io/ongoing-236000/python ./python
-      - run: docker push asia.gcr.io/ongoing-236000/python
+      - setup_remote_docker
+      - run: 
+          name: Authorise docker
+          command: ./auth_docker.sh
+      - run:
+          name: Build and push image
+          command: ./build_push.sh
