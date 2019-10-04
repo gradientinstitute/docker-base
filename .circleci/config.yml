@@ -1,5 +1,4 @@
 version: 2.1
-
 executors:
   docker-publisher:
     environment:
@@ -14,28 +13,38 @@ jobs:
       - checkout
       - setup_remote_docker:   
           docker_layer_caching: true
-      - run: docker build -t $IMAGE_NAME ./python
-      - run: docker save -o image.tar $IMAGE_NAME
+      - run: 
+        name: Build docker image
+        command: docker build -t $IMAGE_NAME ./python
+      - run: 
+        name: Save docker image
+        command: docker save -o image.tar $IMAGE_NAME
       - persist_to_workspace:
         root: .
         paths:
           - ./image.tar
-  publish:
+  publish-to-gcloud:
     executor: docker-publisher
     steps:
       - attach_workspace:
         at: /tmp/workspace
-      - setup_remote_docker:
-      - run: ./auth_docker.sh
-      - run: docker load -i /tmp/workspace/image.tar
-      - run: docker push $IMAGE_NAME
+      - setup_remote_docker
+      - run: 
+        name: Authorise docker
+        command: ./auth_docker.sh
+      - run: 
+        name: Load docker image
+        command: docker load -i /tmp/workspace/image.tar
+      - run: 
+        name: Push docker image
+        command: docker push $IMAGE_NAME
       
   workflows:
     version: 2
     build-deploy:
       jobs:
-        - build:
-        - publish-latest:
+        - build
+        - publish-to-gcloud:
           requires:
             - build
           filters:
