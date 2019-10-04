@@ -1,8 +1,6 @@
 version: 2.1
 executors:
   docker-publisher:
-    environment:
-      IMAGE_NAME: asia.gcr.io/ongoing-236000/python-${CIRCLE_BRANCH}
     docker: 
       - image: google/cloud-sdk
 
@@ -12,8 +10,8 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: docker build -t ${IMAGE_NAME} ./python
-      - run: docker save -o image.tar ${IMAGE_NAME}
+      - run: docker build -t asia.gcr.io/ongoing-236000/python-$CIRCLE_BRANCH ./python
+      - run: docker save -o image.tar asia.gcr.io/ongoing-236000/python-$CIRCLE_BRANCH
       - persist_to_workspace:
           root: .
           paths:
@@ -26,6 +24,9 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace
       - setup_remote_docker
+      - run:
+          name: Debug image name
+          command: echo $CIRCLE_BRANCH
       - run: 
           name: Authorise docker
           command: ./auth_docker.sh
@@ -34,7 +35,8 @@ jobs:
           command: docker load -i /tmp/workspace/image.tar
       - run: 
           name: Push docker image
-          command: docker push $IMAGE_NAME
+          command: docker push asia.gcr.io/ongoing-236000/python-$CIRCLE_BRANCH
+
       
 workflows:
   version: 2
