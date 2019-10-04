@@ -23,8 +23,3 @@ RUN echo "en_AU.UTF-8 UTF-8" > /etc/locale.gen \
     python-virtualenv \
     python-pipenv \
     && pacman --noconfirm -Scc
-
-# https://pythonspeed.com/articles/activate-virtualenv-dockerfile/
-ENV VIRTUAL_ENV=/opt/venv
-RUN python3 -m virtualenv --python=/usr/bin/python3 $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
