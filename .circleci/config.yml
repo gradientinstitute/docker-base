@@ -10,8 +10,8 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: docker build -t asia.gcr.io/ongoing-236000/python-$CIRCLE_BRANCH ./python
-      - run: docker save -o image.tar asia.gcr.io/ongoing-236000/python-$CIRCLE_BRANCH
+      - run: docker build -t  python ./python
+      - run: docker save -o image.tar python
       - persist_to_workspace:
           root: .
           paths:
@@ -34,10 +34,12 @@ jobs:
           name: Load docker image
           command: docker load -i /tmp/workspace/image.tar
       - run: 
+          name: Tag docker image
+          command: docker tag python asia.gcr.io/ongoing-236000/python-$CIRCLE_BRANCH
+      - run: 
           name: Push docker image
           command: docker push asia.gcr.io/ongoing-236000/python-$CIRCLE_BRANCH
 
-      
 workflows:
   version: 2
   build-deploy:
