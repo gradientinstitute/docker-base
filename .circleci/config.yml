@@ -18,6 +18,7 @@ jobs:
           root: .
           paths:
             - ./image.tar
+            - ./auth_docker.sh
 
   publish-to-gcloud:
     executor: docker-publisher
@@ -40,12 +41,9 @@ workflows:
   build-deploy:
     jobs:
       - build
-      - publish-to-gcloud
-
-
-# :
-#           requires:
-#             - build
-#           filters:
-#             branches:
-#               only: /^(master|develop)/
+      - publish-to-gcloud:
+          requires:
+            - build
+                filters:
+                  branches:
+                    only: /^(master|develop)/
