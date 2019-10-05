@@ -17,6 +17,7 @@ RUN echo "en_AU.UTF-8 UTF-8" > /etc/locale.gen \
     make \
     git \
     openssh \
+    which \
     wget \
     openblas \
     python-pip \
