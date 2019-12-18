@@ -1,7 +1,7 @@
 # As a matter of course, when updating this grab the latest arch image
 # but USE AN EXPLICIT DIGEST (get from their dockerhub page) so that 
 # an image can't change without a new commit in this repo
-FROM archlinux/base@sha256:ba3d8ab3f76c7c218c6c98380763514e84724f0afae9dcbb61c2125dcf720781
+FROM archlinux/base@sha256:09962d8061f0e001049d3a3432e9e8290bea7ec7f8536c139cfeb0cc93db2862
 MAINTAINER Lachlan McCalman <lachlan@gradientinstitute.org>
 
 ENV EDITOR="/usr/bin/true" \
