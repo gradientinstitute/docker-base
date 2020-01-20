@@ -37,6 +37,6 @@ RUN echo "en_AU.UTF-8 UTF-8" > /etc/locale.gen \
     && cd /tmp/build/yay-bin \
     && sudo -u aur makepkg --skippgpcheck --noconfirm -si
     
-# RUN sudo -u aur yay --answerdiff=None --removemake --noconfirm -S python36 \
-#     && pacman --noconfirm -Scc
+RUN sudo -u aur yay --answerdiff=None --removemake --noconfirm -S python36 \
+    && pacman --noconfirm -Scc
 
